@@ -1,3 +1,13 @@
+const rockButt = document.createElement('button')
+rockButt.innerHTML = 'Rock'
+
+const paperButt = document.createElement('button')
+rockButt.innerHTML = 'Paper'
+
+const scissorsButt = document.createElement('button')
+rockButt.innerHTML = 'Scissors'
+
+
 const choiceTable = ['rock', 'paper', 'scissors']
 let humanScore = 0
 let computerScore = 0
@@ -20,7 +30,7 @@ const getHumanChoice = () => {
 }
 
 const playGame = () => {
-    const maxRounds = 5
+    // const maxRounds = 5
 
     const playRound = (humanChoice, computerChoice) => {
         console.log(`Human choice is: ${humanChoice}`)
@@ -44,11 +54,11 @@ const playGame = () => {
         }
     }
 
-    for (let i = 0; i < maxRounds; i++) {
-        let humanSelection = getHumanChoice()
-        let computerSelection = getComputerChoice()
-        playRound(humanSelection, computerSelection)
-    }
+    // for (let i = 0; i < maxRounds; i++) {
+    //     let humanSelection = getHumanChoice()
+    //     let computerSelection = getComputerChoice()
+    //     playRound(humanSelection, computerSelection)
+    // }
 
     console.log(`Human score: ${humanScore} || Computer score: ${computerScore}`)
 
