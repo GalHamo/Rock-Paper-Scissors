@@ -1,16 +1,17 @@
+const MAX_ROUNDS = 5
+const choiceTable = ['rock', 'paper', 'scissors']
+
 const rockButt = document.createElement('button')
 rockButt.innerHTML = 'Rock'
-
 const paperButt = document.createElement('button')
 paperButt.innerHTML = 'Paper'
-
 const scissorsButt = document.createElement('button')
 scissorsButt.innerHTML = 'Scissors'
 
+const startButt = document.createElement('button')
+startButt.innerHTML = 'Start'
 
-const choiceTable = ['rock', 'paper', 'scissors']
-let humanScore = 0
-let computerScore = 0
+let gameResults = document.createElement('div')
 
 const getComputerChoice = () => {
     const arrLength = choiceTable.length
@@ -19,9 +20,8 @@ const getComputerChoice = () => {
 }
 
 const playGame = (buttEvent) => {
-    if(choiceTable.includes(buttEvent.toLowerCase())){
-        console.log('Legal')
-    }
+    let humanScore = 0
+    let computerScore = 0
 
     const rules = {
         scissors : 'paper',
@@ -29,56 +29,55 @@ const playGame = (buttEvent) => {
         rock : 'scissors'
     }
 
-    const playRound = (humanChoice) => {
+    const playRound = (userChoice) => {
         let computerChoice = getComputerChoice()
-        // console.log(`Human choice is: ${humanChoice}`)
-        // console.log(`Computer choice is: ${computerChoice}`)
 
-        
-        if (humanChoice === computerChoice){
-            console.log('Draw')
-        } else if (rules[humanChoice] === computerChoice) {
-            console.log('Human wins')
+        if (userChoice === computerChoice){
+            gameResults.innerHTML = 'Draw'
+        } else if (rules[userChoice] === computerChoice) {
+            gameResults.innerHTML = 'Human wins'
             humanScore++
         } else {
-            console.log('You lose!')
+            gameResults.innerHTML = 'You lose!'
             computerScore++
         }
     }
 
-    // for (let i = 0; i < maxRounds; i++) {
-    //     let humanSelection = getHumanChoice()
-    //     let computerSelection = getComputerChoice()
-    //     playRound(humanSelection, computerSelection)
-    // }
+    if (buttEvent === 'Start'){
+        for (let roundNum = 0; roundNum < MAX_ROUNDS; roundNum++) {
 
-    console.log(`Human score: ${humanScore} || Computer score: ${computerScore}`)
+            rockButt.addEventListener('click', (e) => {
+                const rockChoice = 'rock'
+                playRound(rockChoice)
+            })
+            paperButt.addEventListener('click', (e) => {
+                const paperChoice = 'paper'
+                playRound(paperChoice)
+            })
+            scissorsButt.addEventListener('click', (e) => {
+                const scissorsChoice = 'scissors'
+                playRound(scissorsChoice)
+            })
+        }
+        gameResults.innerHTML = `Human score: ${humanScore} || Computer score: ${computerScore}`
 
-    if (humanScore > computerScore){
-        console.log(`Human Wins!`)
-    } else {
-        console.log('Computer Wins!')
+        if (humanScore > computerScore){
+            gameResults.innerHTML += `Human Wins!`
+        } else {
+            gameResults.innerHTML += `You Lose!`
+        }
     }
 
 }
 
+document.body.appendChild(startButt)
 
-document.body.appendChild(rockButt)
-document.body.appendChild(paperButt)
-document.body.appendChild(scissorsButt)
+startButt.addEventListener('click', () => {
+    document.body.removeChild(startButt)
+    let startGame = 'Start'
+    playGame(startGame)
 
-rockButt.addEventListener('click', (e) => {
-    const rockChoice = 'Rock'
-    getHumanChoice(rockChoice)
-    playGame(rockChoice)
-})
-paperButt.addEventListener('click', (e) => {
-    const paperChoice = 'Paper'
-    getHumanChoice(paperChoice)
-    playGame(paperChoice)
-})
-scissorsButt.addEventListener('click', (e) => {
-    const scissorsChoice = 'Scissors'
-    getHumanChoice(scissorsChoice)
-    playGame(scissorsChoice)
+    document.body.appendChild(rockButt)
+    document.body.appendChild(paperButt)
+    document.body.appendChild(scissorsButt)
 })
