@@ -2,10 +2,10 @@ const rockButt = document.createElement('button')
 rockButt.innerHTML = 'Rock'
 
 const paperButt = document.createElement('button')
-rockButt.innerHTML = 'Paper'
+paperButt.innerHTML = 'Paper'
 
 const scissorsButt = document.createElement('button')
-rockButt.innerHTML = 'Scissors'
+scissorsButt.innerHTML = 'Scissors'
 
 
 const choiceTable = ['rock', 'paper', 'scissors']
@@ -14,14 +14,14 @@ let computerScore = 0
 
 const getComputerChoice = () => {
     const arrLength = choiceTable.length
-
     let randomNum = Math.floor(Math.random() * arrLength)
     return choiceTable.at(randomNum)
 }
 
-const getHumanChoice = () => {
-    let userChoice = prompt('Choose Rock, Paper or Scissors').toLowerCase()
+const getHumanChoice = (buttEvent) => {
+    let userChoice = buttEvent.toLowerCase()
     if (choiceTable.includes(userChoice.toLowerCase())) {
+        console.log(userChoice)
         return userChoice
     } else {
         console.log('Invalid input')
@@ -29,8 +29,11 @@ const getHumanChoice = () => {
     }
 }
 
-const playGame = () => {
+const playGame = (buttEvent) => {
     // const maxRounds = 5
+    if(choiceTable.includes(buttEvent.toLowerCase())){
+        console.log('Legal')
+    }
 
     const playRound = (humanChoice, computerChoice) => {
         console.log(`Human choice is: ${humanChoice}`)
@@ -68,3 +71,23 @@ const playGame = () => {
         console.log('Computer Wins!')
     }
 }
+
+document.body.appendChild(rockButt)
+document.body.appendChild(paperButt)
+document.body.appendChild(scissorsButt)
+
+rockButt.addEventListener('click', (e) => {
+    const rockChoice = 'Rock'
+    getHumanChoice(rockChoice)
+    playGame(rockChoice)
+})
+paperButt.addEventListener('click', (e) => {
+    const paperChoice = 'Paper'
+    getHumanChoice(paperChoice)
+    playGame(paperChoice)
+})
+scissorsButt.addEventListener('click', (e) => {
+    const scissorsChoice = 'Scissors'
+    getHumanChoice(scissorsChoice)
+    playGame(scissorsChoice)
+})
