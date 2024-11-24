@@ -18,33 +18,22 @@ const getComputerChoice = () => {
     return choiceTable.at(randomNum)
 }
 
-const getHumanChoice = (buttEvent) => {
-    let userChoice = buttEvent.toLowerCase()
-    if (choiceTable.includes(userChoice.toLowerCase())) {
-        console.log(userChoice)
-        return userChoice
-    } else {
-        console.log('Invalid input')
-        return getHumanChoice()
-    }
-}
-
 const playGame = (buttEvent) => {
-    // const maxRounds = 5
     if(choiceTable.includes(buttEvent.toLowerCase())){
         console.log('Legal')
     }
 
-    const playRound = (humanChoice, computerChoice) => {
-        console.log(`Human choice is: ${humanChoice}`)
-        console.log(`Computer choice is: ${computerChoice}`)
+    const rules = {
+        scissors : 'paper',
+        paper : 'rock',
+        rock : 'scissors'
+    }
 
-        const rules = {
-            scissors : 'paper',
-            paper : 'rock',
-            rock : 'scissors'
-        }
-        console.log(Object.keys(rules))
+    const playRound = (humanChoice) => {
+        let computerChoice = getComputerChoice()
+        // console.log(`Human choice is: ${humanChoice}`)
+        // console.log(`Computer choice is: ${computerChoice}`)
+
         
         if (humanChoice === computerChoice){
             console.log('Draw')
@@ -70,7 +59,9 @@ const playGame = (buttEvent) => {
     } else {
         console.log('Computer Wins!')
     }
+
 }
+
 
 document.body.appendChild(rockButt)
 document.body.appendChild(paperButt)
