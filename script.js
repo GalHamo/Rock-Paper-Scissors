@@ -53,6 +53,9 @@ const playGame = (buttEvent) => {
                 gameResults.innerHTML += ` Computer Wins!`
             }
             
+            rockButt.disabled = true
+            paperButt.disabled = true
+            scissorsButt.disabled = true
         }
     }
 
@@ -72,10 +75,7 @@ const playGame = (buttEvent) => {
             const computerChoice = getComputerChoice()
             playRound(scissorsChoice, computerChoice)
         })
-
     }
-    
-
 }
 document.body.appendChild(gameResults)
 document.body.appendChild(startButt)
@@ -90,5 +90,3 @@ startButt.addEventListener('click', () => {
 
     playGame(startGame)
 })
-
-
